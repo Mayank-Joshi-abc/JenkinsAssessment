@@ -1,31 +1,36 @@
 pipeline {
     agent any
+
     triggers {
-        cron('H H * * 0') // Runs every 7 days
+        cron('H H * * 0') // Runs every 7 days (Sunday)
     }
+
     stages {
         stage('Checkout') {
             steps {
-                // Intentional error: wrong branch name
-                git branch: 'master', url: 'https://github.com/Mayank-Joshi-abc/JenkinsAssessment.git'
+                git branch: 'main', url: 'https://github.com/Mayank-Joshi-abc/JenkinsAssessment.git'
             }
         }
+
         stage('Build') {
             steps {
-                echo 'Building...'
+                echo 'Building the project...'
             }
         }
+
         stage('Test') {
             steps {
                 echo 'Running tests...'
             }
         }
+
         stage('Deploy') {
             steps {
-                echo 'Deploying...'
+                echo 'Deploying the application...'
             }
         }
     }
+
     post {
         success {
             echo 'Pipeline completed successfully.'
